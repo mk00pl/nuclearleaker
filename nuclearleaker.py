@@ -51,6 +51,8 @@ if __name__ == "__main__":
         #spawning a menu and printing stuff
         NL = NuclearLeaker(argv[1])
         print("There are {} leaks related to {}".format(len(NL),str(argv[1])))
+        if len(NL) == 0:
+            exit(0)
         for i in range(len(NL)):
             print("[{}] {}".format(i,NL[i]["database"]))
         choice = input("which one to check? >")
