@@ -1,7 +1,7 @@
 # NuclearLeaker
 nuclearleaker is a simple script to
 check if website or a service was
-breached and added to [nuclearleaks.com][https://nuclearleaks.com] site
+breached and added to [nuclearleaks.com](https://nuclearleaks.com) site
 
 ## Installation
 ```
