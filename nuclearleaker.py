@@ -16,10 +16,12 @@ def NuclearLeaker(target):
     for row in table.find_all('tr'):
             data = row.get_text(separator=':').split(":")
             if target in data[1].lower():
-                site = {"entries":data[0],"database":data[1],
-                "hashing-algorithm":data[2],"category":data[3],
-                "dump-date":data[4] if len(data) == 5 else None,
-                "acknowledgement":row.find('a')['href'] if len(data) == 6 else "No"
+                site = {"entries":data[0] if len(data) >= 1 else None,
+                "database":data[1] if len(data) >= 2 else None,
+                "hashing-algorithm":data[2] if len(data) >= 3 else None,
+                "category":data[3] if len(data) >= 4 else None,
+                "dump-date":data[4] if len(data) >= 5 else None,
+                "acknowledgement":row.find('a')['href'] if len(data) >= 6 else "No"
                 }
                 services.append(site.copy())
     return services
@@ -34,16 +36,18 @@ def print_results(data):
     print("Dump date: {}".format(data['dump-date']))
     print("Acknlowledged?: {}".format(data['acknowledgement']))
 
+
+
 if __name__ == "__main__":
     
     #checking if argument was provided
     if len(argv) < 2:
         print("Usage: {} *argument* *target*".format(argv[0]))
         print("arguments:")
-        print("all - optional argument,you can")
+        print("--all - optional argument,you can")
         print("use it to display all results at once")
         exit(1)
-    elif len(argv) == 3 and str(argv[1]) == "all":
+    elif len(argv) == 3 and str(argv[1]) == "--all":
         NL = NuclearLeaker(str(argv[2]))
         for i in range(len(NL)):
             print_results(NL[i])
